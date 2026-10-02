@@ -46,7 +46,7 @@ This is especially important for the main question of the project. A tract with 
 
 ## Questions
 
-1. Does it make sense to define an "under-observed" area as somewhere with substantially less eBird activity than we would expect given the amount of available green space? Are there other factors I should be considering when defining what we would "expect"?
+1. For identifying areas that are relatively under-observed, I am planning to compare eBird activity with available green space. Do you think there are other factors I should consider when establishing how much birding activity we would expect in an area?
 
 2. Is census tract an appropriate level of geography for this comparison, or should I consider a larger unit given how people actually use parks and move around while birding?
 
