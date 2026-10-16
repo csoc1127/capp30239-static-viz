@@ -1,0 +1,13 @@
+[project]
+name = "capp30239-static-viz"
+version = "0.1.0"
+requires-python = ">=3.14"
+dependencies = [
+    "altair>=6.3.0",
+    "geopandas>=1.2.0",
+    "ipykernel>=7.4.0",
+    "jupyter>=1.1.1",
+    "numpy>=2.5.4",
+    "pandas>=3.0.6",
+    "vl-convert-python>=1.9.0.post1",
+]
