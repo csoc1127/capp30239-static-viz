@@ -43,7 +43,7 @@ SUBTLE = "#5F6770"       # Dark-eyed Junco gray
 
 MAP_PALETTES = {
     "checklists": [
-        "#F6F1EC", "#DDC6B3", "#BA9270", "#8B5E3C", "#4B3225"
+    "#EEE6DE", "#D5BAA4", "#AE8465", "#805439", "#4B3225"
     ],
     "species_richness": [
         "#ECF3ED", "#B5D4BC", "#75AA8B", "#387753", "#173E2A"
@@ -52,14 +52,30 @@ MAP_PALETTES = {
         "#FFF1E6", "#F4C9A8", "#E9955E", "#C8602B", "#823716"
     ],
     "monthly_activity": [
-        "#F6F1EC", "#DDC6B3", "#BA9270", "#8B5E3C", "#4B3225"
-    ],
+    "#FFF5DD",
+    "#F7D117",
+    "#E39A2D",
+    "#C8602B",
+    "#7A2137"
+],
+    "observer_share": [
+    "#FFF0F1", "#F1B6C0", "#DC7285", "#C41E3A", "#741127"
+],
+
 }
 # ouse sparrow
 # mallard
 # american robin
 
 OBSERVER_COLORS = {
-    "Top observer": BIRD_COLORS["Northern Cardinal"],
-    "Everyone else": BIRD_COLORS["Dark-eyed Junco"],
+    "Top observer": "#C41E3A",   # northern cardinal red
+    "Everyone else": "#E9D9DD"   # soft pale pink-gray
 }
+
+TOP_OBSERVER_MAP = [
+    "#FCF7F8",
+    "#F3D7DE",
+    "#E9A8B8",
+    "#D86A84",
+    "#C41E3A"
+]
