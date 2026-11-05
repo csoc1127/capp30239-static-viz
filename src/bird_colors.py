@@ -4,6 +4,11 @@ Approximate plumage-inspired HEX selections, design-inspired, not actually scien
 Keeping species colors stable across charts; idea is to use graduated palettes for numeric maps.
 
 """
+SCATTER_COLORS = {
+    "others": "#E39A2D",
+    "most_checklists": "#7A2137",
+    "most_birds": "#1B7F79"
+}
 
 BIRD_COLORS = {
     "American Robin": "#C8602B",             # orange breast
@@ -79,3 +84,5 @@ TOP_OBSERVER_MAP = [
     "#D86A84",
     "#C41E3A"
 ]
+
+
