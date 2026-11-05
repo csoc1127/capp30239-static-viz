@@ -1,61 +1,409 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Birds, Birders, and Chicago</title>
+    <title>Chicago's Birders and Birds</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 850px;
+            margin: 40px auto;
+            padding: 0 20px;
+            line-height: 1.6;
+            color: #1F2A2E;
+            background-color: #FAF9F6;
+        }
+
+        h1 {
+            font-size: 42px;
+            line-height: 1.2;
+            margin: 12px 0 18px;
+        }
+
+        h2 {
+            font-size: 28px;
+            margin-bottom: 12px;
+        }
+
+        h3 {
+            font-size: 21px;
+            margin-top: 35px;
+            margin-bottom: 8px;
+        }
+
+        section {
+            margin-top: 50px;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        figure {
+            margin: 28px 0 36px;
+        }
+
+        figcaption {
+            color: #626A68;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+
+        .eyebrow {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: #7A2137;
+        }
+
+        .subtitle {
+            font-size: 21px;
+            line-height: 1.4;
+            color: #4B5550;
+            max-width: 700px;
+        }
+
+        .numbers {
+            font-size: 14px;
+            font-weight: bold;
+            color: #7A2137;
+            letter-spacing: 0.2px;
+        }
+
+        /* let the three maps extend beyond the text column */
+        .wide {
+            width: 1200px;
+            max-width: calc(100vw - 40px);
+            margin-left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .wide img {
+            width: 100%;
+        }
+
+
+        /* bird profiles */
+        .bird-feature, .bird-gallery {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 22px;
+            margin: 28px 0;
+        }
+
+        .bird-feature {
+            align-items: center;
+        }
+
+        /* preserve the full shearwater photo */
+        .bird-feature img {
+            width: 100%;
+            height: auto;
+            border-radius: 4px;
+        }
+
+        /* keep each bird fully visible, even in portrait photos */
+        .bird-card img {
+            width: 100%;
+            height: 320px;
+            object-fit: contain;
+            background-color: #EEECE6;
+            border-radius: 4px;
+        }
+
+        .bird-card h4, .bird-feature h4 {
+            font-size: 19px;
+            margin: 9px 0;
+        }
+
+        .bird-date {
+            font-size: 13px;
+            font-weight: bold;
+            color: #7A2137;
+            margin: 8px 0;
+        }
+
+        .photo-note {
+            color: #626A68;
+            font-size: 13px;
+        }
+
+        a {
+            color: #7A2137;
+        }
+
+        @media (max-width: 650px) {
+            .bird-feature, .bird-gallery {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        footer {
+            border-top: 1px solid #D8D8D0;
+            margin-top: 65px;
+            padding-top: 18px;
+            font-size: 13px;
+            color: #626A68;
+        }
+    </style>
 </head>
 
 <body>
-
     <header>
-        <h1>Birds, Birders, and Chicago</h1>
-        <p>What Chicago's birdwatchers can tell us about the city's birds,
-            and how the people doing the counting shape what we see.</p>
-        <p>Chicago eBird data, 2020–2024</p>
+        <p class="eyebrow">Chicago eBird data | 2020–2024</p>
+        <h1>Chicago's Birders and Birds</h1>
+        <p class="subtitle">
+            Every bird in the record passed through someone's eyes first.
+            Where people looked and what they recorded shaped the story these data tell.
+        </p>
     </header>
 
     <main>
-
+        <!-- introduction -->
         <section>
-            <h2>The Birds</h2>
-            <p>What birds are Chicagoans reporting most often?</p>
-
-            <figure>
-                <img src="figures/top_species.svg"
-                     alt="Bar chart of Chicago's most frequently reported birds">
-                <figcaption>Birds appearing on the most eBird checklists, 2020–2024.</figcaption>
-            </figure>
+            <p>
+                On Chicago's North Side, one birdwatcher submitted more than seven
+                out of every ten birdwatching checklists recorded in Edgewater.
+                That concentration raises a question about the city's bird record:
+                how much of what we know depends on who's watching?
+            </p>
+            <p>
+                Every spring, Chicago's lakefront welcomes migrating birds and the
+                people eager to find them. Birdwatchers share their sightings through
+                eBird, a citizen-science project that brings individual observations
+                together into a larger picture of birdlife.
+            </p>
+            <p class="numbers">218,781 checklists | 335 species | Five years</p>
+            <p>
+                These records offer a way to explore the people doing the counting,
+                the birds they report and the places where their attention gathers.
+            </p>
         </section>
 
+        <!-- the birders -->
         <section>
             <h2>The Birders</h2>
-            <p>Does submitting more checklists mean counting more birds?</p>
+            <h3>One birder, two notable footprints</h3>
+            <p>
+                This eBird account contributed 5.7% of all Chicago checklists between 2020 and 2024. 
+                In Edgewater, that same account contributed 71.1%. The account's activity was concentrated
+                in just two years: 1,490 checklists in 2023 and another 10,915 in 2024. 
+                That surge in reporting shows how one highly active contributor can shape a 
+                neighborhood's birdwatching record.
+            </p>
+
+            <figure>
+                <img src="special_birder_donut.svg"
+                     alt="Doughnut charts showing one observer account contributed 5.7 percent of Chicago checklists and 71.1 percent of Edgewater checklists">
+                <figcaption>
+                    One account's share of submitted checklists across Chicago
+                    and in Edgewater, 2020–2024.
+                </figcaption>
+            </figure>
+
+            <h3>Two different leaders</h3>
+            <p>
+                The account with the most checklists submitted 12,405 reports.
+                A different account led in total birds counted. Checklist activity
+                and the number of birds reported give us two ways to understand
+                a birder's contributions.
+            </p>
 
             <figure>
                 <img src="figures/observer_scatter.svg"
-                     alt="Scatterplot comparing checklists and birds counted by observer">
-                <figcaption>Each dot represents an active observer account.</figcaption>
+                     alt="Scatterplot of checklists submitted and birds counted by active observer accounts, highlighting the leaders for each measure">
+                <figcaption>
+                    The checklist leader submitted 12,405 reports recording 250,604 birds.
+                    The bird-count leader submitted 716 reports recording 543,939 birds.
+                    Each point represents an observer account.
+                </figcaption>
             </figure>
         </section>
 
+        <!-- the birds -->
+        <section>
+            <h2>The Birds</h2>
+            <h3>Which birds make the most appearances?</h3>
+            <p>
+                The American Robin appeared on 111,897 checklists, more than any other
+                species in the study period. Canada Geese led in the total number of
+                birds counted. A familiar backyard bird can appear across many outings,
+                while large flocks can add hundreds of birds to a single report.
+            </p>
+
+            <figure>
+                <img src="figures/top_species.svg"
+                     alt="Horizontal bars showing the eight species reported on the most Chicago eBird checklists">
+                <figcaption>
+                    The eight bird species appearing on the most checklists,
+                    Chicago, 2020–2024.
+                </figcaption>
+            </figure>
+
+            <h3>335 species, from familiar to fleeting</h3>
+            <p>
+                The full species list gives us a broader picture. Of the 335 species
+                documented, 270 appeared on at least 100 checklists, 38 appeared on
+                10 to 99 and 27 appeared on fewer than ten. Each dot represents a
+                species, grouped by how often Chicago birdwatchers reported it.
+            </p>
+
+            <figure>
+                <img src="figures/species_matrix.svg"
+                     alt="Dot matrix of 335 bird species: 270 reported on 100 or more checklists, 38 on 10 to 99 and 27 on fewer than ten">
+                <figcaption>
+                    One dot per species. Teal shows 100 or more checklists, orange
+                    shows 10 to 99 and wine-red shows one to nine. These groups
+                    describe reporting frequency.
+                </figcaption>
+            </figure>
+
+            <h3>Unexpected visitors</h3>
+            <p>
+                Among the less frequently reported species were birds whose visits
+                made Illinois birding history. On December 8, 2024, observers found
+                a Short-tailed Shearwater at Montrose Point. The ocean-going bird
+                became the first confirmed Illinois record of its species. Three
+                eBird accounts recorded it in Uptown that day.
+            </p>
+
+            <div class="bird-feature">
+                <img src="birds/short_tailed_shearwater_reference.png"
+                     alt="Reference photograph of a dark Short-tailed Shearwater flying over water">
+                <div>
+                    <p class="bird-date">December 8, 2024 | Uptown</p>
+                    <h4>Short-tailed Shearwater</h4>
+                    <p>
+                        A seabird usually found over the ocean appeared along
+                        Lake Michigan. The
+                        <a href="https://www.chicagobirder.org/blog/2025/1/13/2024-the-year-in-birds">Chicago Ornithological Society</a>
+                        documented the sighting as Illinois's first confirmed record.
+                    </p>
+                </div>
+            </div>
+
+            <div class="bird-gallery">
+                <div class="bird-card">
+                    <img src="birds/gull_billed_tern_reference.webp"
+                         alt="Reference photograph of a Gull-billed Tern in flight">
+                    <p class="bird-date">June 1, 2023 | Uptown</p>
+                    <h4>Gull-billed Tern</h4>
+                    <p>
+                        This coastal tern appeared at Montrose Point. Two Chicago
+                        checklists recorded the bird, which became the state's
+                        second documented sighting.
+                        <a href="https://www.dailyherald.com/20240117/pets-and-animals/recapping-the-year-in-birding-local-watchers-experienced-some-mind-bending-sightings-in-2023/">Read about Montrose bird sightings.</a>
+                    </p>
+                </div>
+
+                <div class="bird-card">
+                    <img src="birds/ferruginous_hawk_reference.png"
+                         alt="Reference photograph of a Ferruginous Hawk perched on a branch">
+                    <p class="bird-date">November 6–7, 2023 | Chicago</p>
+                    <h4>Ferruginous Hawk</h4>
+                    <p>
+                        This hawk of western North America's grasslands was reported
+                        in Uptown and the Near South Side on consecutive days.
+                        The Illinois records committee accepted the Chicago record.
+                        <a href="https://raptor.umn.edu/about-raptors/raptors-north-america/ferruginous-hawk">Learn about the species.</a>
+                    </p>
+                </div>
+            </div>
+            <p class="photo-note">
+                Photographs show the featured species at locations outside Chicago.
+                Photo credits: Gull-billed Tern — Kris Webb;
+                Ferruginous Hawk — University of Minnesota Raptor Center;
+                Short-tailed Shearwater — Macaulay Library (photographer anonymous).
+            </p>
+            </section>
+
+        <!-- the city -->
         <section>
             <h2>The City</h2>
-            <p>Where and when are Chicago's birdwatching reports concentrated?</p>
+            <h3>Following the birds along the lakefront</h3>
+            <p>
+                Montrose Point draws birdwatchers to Uptown's stretch of lakefront.
+                Uptown recorded the most checklists among Chicago's community areas
+                and accounted for nearly one-third of birds counted in these records.
+                The maps reveal how concentrated the city's reporting activity can be.
+            </p>
+
+            <figure class="wide">
+                <img src="three_map_projectfinal.svg"
+                     alt="Three maps comparing checklist submissions, distinct species reported and total birds counted across Chicago's community areas">
+                <figcaption>
+                    Chicago's 77 community areas compared by checklists submitted,
+                    species documented and birds counted, 2020–2024.
+                </figcaption>
+            </figure>
+
+            <h3>May is the peak. Winter has its birdwatchers, too.</h3>
+            <p>
+                May brings the biggest wave of checklists in every year of the
+                study, during Chicago's spring migration. The heatmap also shows
+                people submitting reports through December, January and February.
+                Chicago's typical January high is about 32°F, with a low near 19°F.
+                The city's birdwatchers keep looking through the cold months.
+            </p>
+            <p>
+                Winter conditions vary. February 2024 was Chicago's warmest
+                February on record. Across these five years, the checklist
+                submissions capture a year-round habit of watching birds.
+            </p>
 
             <figure>
                 <img src="figures/monthly_heatmap.svg"
-                     alt="Heatmap of monthly birdwatching checklists from 2020 to 2024">
-                <figcaption>Birdwatching activity by month and year.</figcaption>
+                     alt="Heatmap of monthly Chicago eBird checklist submissions from 2020 through 2024, showing a strong peak in May">
+                <figcaption>
+                    Monthly checklist submissions in Chicago, 2020–2024.
+                    Darker cells indicate more reports, including during winter.
+                </figcaption>
             </figure>
         </section>
 
+        <!-- conclusion -->
+        <section>
+            <h2>What the birders show us</h2>
+            <p>
+                Chicago's birdwatching records grow through thousands of choices about
+                where to go, when to look and what to submit. Those choices shape the
+                patterns we see across neighborhoods, seasons and observer accounts.
+            </p>
+            <p>
+                From familiar robins to a shearwater at Montrose Point, the record
+                tells a story about Chicago's birds and the community paying
+                attention to them.
+            </p>
+        </section>
     </main>
 
     <footer>
-        <p>Data: Cornell Lab of Ornithology, eBird Basic Dataset.</p>
-    </footer>
+        <p>
+            Sources: <a href="https://ebird.org/">Cornell Lab of Ornithology, eBird Basic Dataset</a>
+            (August 2026 release), Chicago observations from 2020–2024.
+            Geographic summaries use
+            <a href="https://data.cityofchicago.org/d/igwz-8jzy">City of Chicago community-area boundaries</a>.
+        </p>
+        <p>
+            Methods: Each checklist is a submitted birdwatching report. Birds counted
+            are summed across checklists, so the same individual bird may be reported
+            on multiple outings. Observer IDs identify eBird accounts. Species
+            frequency measures the number of checklists reporting a species.
+            eBird data tells us which unusual birds were reported, while separate 
+            ornithological records confirm how significant those sightings were.
+        </p>
 
+        <p>
+            Bird records: <a href="https://www.chicagobirder.org/blog/2025/1/13/2024-the-year-in-birds">Chicago Ornithological Society</a>,
+            <a href="https://www.dailyherald.com/20240117/pets-and-animals/recapping-the-year-in-birding-local-watchers-experienced-some-mind-bending-sightings-in-2023/">Daily Herald</a>
+            and <a href="https://illinoisbirdrecords.org/wp-content/uploads/2026/02/IORC_Secretarys_report_2023.pdf">Illinois Ornithological Records Committee</a>.
+            Weather: <a href="https://www.weather.gov/lot/ord_rfd_monthly_yearly_normals">National Weather Service climate normals</a>
+            and <a href="https://www.weather.gov/lot/2024AnnualClimate">2024 climate summary</a>.
+        </p>
+    </footer>
 </body>
 </html>
