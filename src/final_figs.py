@@ -4,7 +4,7 @@ import altair as alt
 import pandas as pd
 import geopandas as gpd
 
-from bird_colors import BIRD_COLORS, MAP_PALETTES, OBSERVER_COLORS, SCATTER_COLORS
+from bird_colors import MAP_PALETTES, OBSERVER_COLORS, SCATTER_COLORS, BIRD_COLORS
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -334,7 +334,7 @@ observer_scatter = (
 
 observer_scatter.save("../static-viz/figures/observer_scatter.svg")
 
-# the birds most often reported in chicago
+#birds most often reported in chicago
 
 species = pd.read_csv("../data/processed/species_summary.csv")
 top_species = species.nlargest(8, "checklists")
@@ -370,195 +370,68 @@ species_chart = alt.Chart(top_species).mark_bar(
 
 species_chart.save("../static-viz/figures/top_species.svg")
 
-# rank species by how many checklists they appear on
-species_distribution = (
+# show all species by checklist frequency
+species_grid = (
     species[["COMMON NAME", "checklists"]]
     .sort_values("checklists", ascending=False)
     .reset_index(drop=True)
-    .assign(rank=lambda df: df.index + 1)
 )
 
-# label the top 10 species
-top_species_labels = species_distribution.head(10)
+# group species by how often they're reported
+frequency_order = ["100+ checklists", "10–99 checklists", "1–9 checklists"]
+species_grid["frequency_group"] = pd.cut(
+    species_grid["checklists"],
+    bins=[0, 10, 100, float("inf")],
+    labels=["1–9 checklists", "10–99 checklists", "100+ checklists"],
+    right=False
+)
 
-species_line = alt.Chart(species_distribution).mark_line(
-    color="#B9B1A5",
-    strokeWidth=2
+# each dot represents one bird species
+species_grid["column"] = species_grid.index % 24
+species_grid["row"] = species_grid.index // 24
+
+species_matrix = alt.Chart(species_grid).mark_circle(
+    size=190,
+    stroke="white",
+    strokeWidth=0.8
 ).encode(
     x=alt.X(
-        "rank:Q",
-        title="Species rank",
-        axis=alt.Axis(tickCount=8)
+        "column:Q",
+        axis=None,
+        scale=alt.Scale(domain=[-1, 24])
     ),
     y=alt.Y(
-        "checklists:Q",
-        title="Checklists containing species",
-        scale=alt.Scale(type="log"),
-        axis=alt.Axis(format="~s", tickCount=6)
-    )
-)
-
-species_dots = alt.Chart(species_distribution).mark_circle(
-    color="#387753",
-    size=45,
-    opacity=0.85
-).encode(
-    x="rank:Q",
-    y="checklists:Q",
+        "row:Q",
+        axis=None,
+        scale=alt.Scale(domain=[14, -1])
+    ),
+    color=alt.Color(
+        "frequency_group:N",
+        title=None,
+        scale=alt.Scale(
+            domain=frequency_order,
+            range=[
+                SCATTER_COLORS["most_birds"],
+                SCATTER_COLORS["others"],
+                SCATTER_COLORS["most_checklists"]
+            ]
+        ),
+        legend=alt.Legend(orient="bottom", direction="horizontal")
+    ),
     tooltip=[
-        alt.Tooltip("rank:Q", title="Rank"),
         alt.Tooltip("COMMON NAME:N", title="Species"),
         alt.Tooltip("checklists:Q", title="Checklists", format=",")
     ]
-)
-
-species_labels = alt.Chart(top_species_labels).mark_text(
-    dx=8,
-    dy=-6,
-    align="left",
-    fontSize=11,
-    color="#1F2A2E"
-).encode(
-    x="rank:Q",
-    y="checklists:Q",
-    text="COMMON NAME:N"
-)
-
-species_distribution_chart = (
-    species_line + species_dots + species_labels
 ).properties(
     title=chart_title(
-        "A small group of birds dominates Chicago's eBird record",
-        "335 species ranked by checklist frequency, 2020–2024"
+        "335 species, from familiar to fleeting",
+        "Each dot is one species documented in Chicago, 2020–2024"
     ),
-    width=650,
-    height=400
-)
+    width=700,
+    height=390
+).configure_view(stroke=None)
 
-species_distribution_chart.save("../static-viz/figures/species_distribution.svg")
-print("total species:", len(species_distribution))
-print("top species:", species_distribution.iloc[0]["COMMON NAME"])
-print("top species checklists:", species_distribution.iloc[0]["checklists"])
-print(
-    "species appearing on fewer than 100 checklists:",
-    (species_distribution["checklists"] < 100).sum()
-)
-print(
-    "species appearing on fewer than 10 checklists:",
-    (species_distribution["checklists"] < 10).sum()
-)
-print(species["checklists"].describe())
+species_matrix.save("../static-viz/figures/species_matrix.svg")
 
-print("\nleast frequently reported species:")
-print(
-    species.nsmallest(15, "checklists")[
-        ["COMMON NAME", "checklists"]
-    ].to_string(index=False)
-)
-
-print("\nspecies on fewer than 100 checklists:")
-print((species["checklists"] < 100).sum())
-
-
-# investigate unexpected visitors
-observations = pd.read_csv(
-    "../data/processed/chicago_bird_observations_2020_2024.csv.gz"
-)
-
-print("\nobservation columns:")
-print(observations.columns.tolist())
-
-
-# examine reports of unusual bird species
-unusual_birds = [
-    "Short-tailed Shearwater",
-    "Ferruginous Hawk",
-    "Gull-billed Tern",
-    "Pacific Loon",
-    "White-faced Ibis"
-]
-
-unusual_sightings = observations[
-    (observations["CATEGORY"] == "species") &
-    (observations["COMMON NAME"].isin(unusual_birds))
-].copy()
-
-unusual_sightings = unusual_sightings.sort_values(
-    ["COMMON NAME", "OBSERVATION DATE"]
-)
-
-print("\nunexpected visitor sightings:")
-print(
-    unusual_sightings[[
-        "COMMON NAME",
-        "OBSERVATION DATE",
-        "community",
-        "OBSERVER ID",
-        "SAMPLING EVENT IDENTIFIER",
-        "OBSERVATION COUNT"
-    ]].to_string(index=False)
-)
-
-
-# timeline of five documented unexpected visitors
-visitors = [
-    "White-faced Ibis",
-    "Gull-billed Tern",
-    "Ferruginous Hawk",
-    "Pacific Loon",
-    "Short-tailed Shearwater"
-]
-
-visitor_dates = (
-    observations[
-        (observations["CATEGORY"] == "species") &
-        (observations["COMMON NAME"].isin(visitors))
-    ]
-    .groupby("COMMON NAME")
-    .agg(
-        first_seen=("OBSERVATION DATE", "min"),
-        checklists=("SAMPLING EVENT IDENTIFIER", "nunique")
-    )
-    .reset_index()
-)
-
-visitor_dates["first_seen"] = pd.to_datetime(
-    visitor_dates["first_seen"]
-)
-visitor_dates["date_label"] = (
-    visitor_dates["first_seen"].dt.strftime("%b %d, %Y")
-)
-
-base = alt.Chart(visitor_dates).encode(
-    x=alt.X("first_seen:T", title="Date reported"),
-    y=alt.Y("COMMON NAME:N", sort=visitors, title=None)
-)
-
-visitor_points = base.mark_circle(
-    size=180,
-    color="#7A2137"
-)
-
-visitor_labels = base.mark_text(
-    align="left",
-    dx=12,
-    fontSize=12,
-    color="#1F2A2E"
-).encode(
-    text="date_label:N"
-)
-
-visitor_chart = (
-    visitor_points + visitor_labels
-).properties(
-    title=chart_title(
-        "Unexpected visitors in Chicago",
-        "Five unusual species recorded between 2020 and 2024"
-    ),
-    width=650,
-    height=260
-)
-
-visitor_chart.save(
-    "../static-viz/figures/unexpected_visitors.svg"
-)
+print("species total:", len(species_grid))
+print(species_grid["frequency_group"].value_counts())

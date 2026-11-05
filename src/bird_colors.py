@@ -86,3 +86,8 @@ TOP_OBSERVER_MAP = [
 ]
 
 
+SCATTER_COLORS = {
+    "others": "#E39A2D",          # heatmap orange
+    "most_checklists": "#7A2137", # cardinal wine
+    "most_birds": "#1B7F79"       # teal
+}
