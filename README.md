@@ -3,6 +3,9 @@
 Ciara Staveley-O'Carroll  
 CAPP 30239 — Data Visualization for Policy Analysis
 
+LLM USE:  I used ChatGPT to troubleshoot Inkscape issues, debug some Python visualization code and resolve HTML formatting problems, photo preview issues, header issues. Chat helped me take the exploratory code I had in jupyter files and destill it into my final figures py file. I also used it to help whittle down and organize the final article. Earlier in the project, I used Claude to explore bird-inspired HEX colors. I worked back and forth with it to develop a combination of colors based on the species I was finding in the data, then I chose the hex colors that made up each palette. 
+
+
 ## Description
 My goal was to understand how birdwatching activity varies across Chicago and how the people collecting observations shape the city's bird records. Using eBird data from 2020 to 2024, I explored who was reporting birds, which species they documented and where and when those observations were concentrated. I started this project wanting to understand where Chicagoans go birding and why some parts of the city receive more attention than others. My original proposal included park space and neighborhood demographics. Once I started working with the eBird data, I became more interested in the records themselves: who submits them, which birds get reported and where and when people are looking.
 

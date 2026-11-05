@@ -1,6 +1,5 @@
 """ Bird-inspired colors for Chicago eBird data viz
-
-Approximate plumage-inspired HEX selections, design-inspired, not actually scientifically sourced.
+ feather-inspired HEX selections, not actually scientifically sourced.
 Keeping species colors stable across charts; idea is to use graduated palettes for numeric maps.
 
 """
@@ -38,7 +37,7 @@ PAPER = "#F4F6F7"        # American Herring Gull white
 INK = "#1F2A2E"          # Double-crested Cormorant black
 SUBTLE = "#5F6770"       # Dark-eyed Junco gray
 
-# Ordered light to dark: appropriate for numeric counts on choropleths/heatmaps.
+# Ordered light to dark: appropriate for number counts on choropleths/heatmaps.
 # MAP_PALETTES = {
 #     "checklists": ["#F4F6F7", "#B9B1A5", "#8B5E3C", "#5A5650", "#2B2B2B"],
 #     "species_richness": ["#F4F6F7", "#B9B1A5", "#3E7C6B", "#2F6B3A", "#1F2A2E"],
@@ -84,10 +83,3 @@ TOP_OBSERVER_MAP = [
     "#D86A84",
     "#C41E3A"
 ]
-
-
-SCATTER_COLORS = {
-    "others": "#E39A2D",          # heatmap orange
-    "most_checklists": "#7A2137", # cardinal wine
-    "most_birds": "#1B7F79"       # teal
-}
